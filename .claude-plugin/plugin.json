@@ -1,0 +1,43 @@
+{
+  "name": "ddclaw",
+  "description": "Personal agent skills for EMs — memory persistence, meeting prep, people context, weekly reviews",
+  "version": "1.0.0",
+  "author": {
+    "name": "Ladi Bello"
+  },
+  "repository": "https://github.com/DavyBello/ddclaw-plugin",
+  "license": "MIT",
+  "keywords": ["em", "engineering-manager", "memory", "personal-agent", "1on1", "meeting-prep"],
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-start-memory.sh"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[MEMORY SAVE REQUIRED] Context compacting. Save decisions, action items, and context to memory/'$(date +%Y-%m-%d)'.md now.'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[MEMORY SAVE REQUIRED] Session ending. Save remaining decisions and context to memory/'$(date +%Y-%m-%d)'.md.'"
+          }
+        ]
+      }
+    ]
+  }
+}

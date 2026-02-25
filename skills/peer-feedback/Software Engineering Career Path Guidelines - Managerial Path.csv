@@ -1,0 +1,143 @@
+,See introduction in Confluence (link),,,,
+,Engineering Manager I,Engineering Manager II,Engineering Director,Engineering Sr Director,Engineering VP
+Scope,"Typically manages a team of 4 to 7 engineers with well-defined engineering and product scope.
+
+Seeks appropriate guidance from senior management on challenging issues of people, product, and engineering management.","Typically manages multiple teams with an enumerated set of engineering & product responsibilities. May manage a larger single team, typically with multiple senior engineers.
+
+Manages independently, delegating effectively to managers and/or senior engineers within the team.","Typically responsible for an area of the business. Defines, staffs, and manages the teams necessary to support their scope.
+
+Responsible for the output, health, and strategy of their teams.","Typically responsible for multiple areas of the business.
+
+Strategic management of team with a multi-year vision for impact and health. Ensures this is aligned with, and communicated across the company.","Typically responsible for a large segment of the engineering org.
+
+Responsible for the growth, output, and happiness of the engineering org they lead, balancing needs of people, the business, customers, product, infrastructure."
+Product Management,"Works with Product Managers to set the direction for the product.
+
+Manages the backlog, balancing new requests with priorities for the team.","Works with Product Managers to set the vision and strategy for the product.
+
+Partners with Product, leadership and partner teams to build a roadmap that achieves product goals while leaving room to adequately address technical challenges.","Works with Eng Managers and Product Managers to ensure teams are working on the highest value efforts (aka high bang for the buck).
+
+Ensures critical issues (with the system or the product) are at the top of the roadmap.","Puts in place processes and practices to ensure customer satisfaction with the product.
+
+Identifies technology gaps and opportunities in improving the product.
+
+Makes hard trade-offs of business opportunity vs people-cost vs sustainability.","Backstops, advocates and advances cross-VP work for delivering the right long-term technical/product strategy that also achieves the needed ongoing results.
+
+Ensures the Datadog product remains excellent - has an equal voice in product decisions to Product Management leadership, and it should be used."
+Delivery,"Owns the productivity of the team; runs appropriate processes (e.g. measurable goals, milestones, sprint planning, reviews) to keep the team on track delivering.
+
+Removes roadblocks (technical, procedural, etc) that prevent the team from doing its best work.","Coaches senior engineers and managers to write project plans for complex initiatives, delivered incrementally, and on time.
+
+Works with leaders on each of their teams to set quarterly OKRs.
+
+Delegates most day to day project management, but stays on top of status and is proactive in communicating issues to partners and management.","Take a keen interest in key projects, ensuring they have clear goals and milestones and forward progress and momentum.
+
+Eliminates roadblocks when we are stuck in the mud.","Ensures teams are aware of and accounting for all stakeholders priorities in OKR planning, and are consistently hitting them.
+
+Handles critical problems, decisions, and escalations in key deliveries.","Understands what the most important things for the company are, and does what is necessary to ensure they happen at the right time - aligning partners, fighting organizational inertia."
+Partner Management,"Builds quality relationships, and collaborates well with other teams.
+
+Proactively shares relevant information -- giving bad news quickly, and appropriately seeking direction.",Works directly with the management of partner teams to prioritize work and negotiate dependencies.,"Anticipates, identifies, and resolves cross-team issues involving their org, escalating as needed.","Works with peers to solve alignment problems across teams; negotiating new ownership boundaries to achieve better outcomes. Only rarely needs to escalate to get ""disagree and commit"" closure, but does not shy away from doing so when misalignment can not be resolved.","Builds strong relationships with peers through which they address the most impactful ownership ambiguities across their orgs, bringing all sides together to agree on the company good."
+Engineering & Operations,"Knows their systems inside and out.
+
+Has strong technical judgment. Recognizes when a design or solution requires additional technical guidance, and knows how to get it.
+
+Capable of contributing a significant amount of high quality code. Knows when and where to do so to best support the team. Strikes a balance between coding and management that shifts towards management as team size grows
+
+Ensures the team consistently ships high quality code & architecture, takes responsibility when problems occur, and has the plan for the next 5 things to make the system much better.
+
+Participates in team on-call rotation.","Not doing urgent or critical-path hands-on engineering, but still writes code to stay in touch - usually operational tools, or greenfield.
+
+Ensures teams are producing high quality code, designs and architecture using processes and practices (e.g. ""find a bug, write a test"", ""code review everything"").
+
+Establishes a high standard of operational excellence for their teams, minimizing incidents, and ensuring engineer happiness in being on top of pager load and toil.
+
+Participates in an escalation rotation.","Stays connected to how systems actually work so instincts are grounded in reality.
+
+Leads their teams through high-severity incidents, using domain knowledge to ensure incident response is focused on the right problems.
+
+Ensures critical technical decisions are sound (with prototypes, testing, investigation, RFCs, whiteboard sessions, etc).
+
+Ensures their teams are on top of SLOs, incident rate, Post Mortems, Public Post Mortems, and resolving post mortem action items.
+
+Participates in an escalation rotation.","Drives best practices and processes in engineering and operations in their teams and across their org, using metrics (e.g. SLOs) as appropriate to scale.
+
+Works with their Directors and Staff Engineers to ensure they have a plan for architecture for the next order of magnitude of scale.
+
+Participates in a high-judgment operational rotation like Incident Executive Lead.","Backstops, advocates and advances cross-VP work for ensuring excellence in architecture.
+
+Stays engaged in our highest impact operational engagement through participation in the Incident Executive Lead rotation."
+People Management,"Team Culture
+Establishes the identity for the team.
+
+People Development
+Manages the engineers on the team, keeping them happy, challenged, motivated, and growing professionally.
+
+Delegates responsibilities to team members in order to help them grow, e.g. empowers senior engineers as technical leaders on their team.
+
+Helps identify career growth opportunities
+
+Identifies people who are struggling and with guidance from more senior management, coaches them to get back on track.
+
+Monitors progress and provides direct and regular feedback to team members.","Team Culture
+Ensures everyone in their teams is able to have their ideas heard, fosters a teamwide sense of psychological safety.
+
+Identifies personal conflicts within their teams and between their teams and other teams, and proactively works to resolve them.
+
+People Development
+Ensures all team members are being given feedback and opportunities to expand scope, learn appropriate skills, and grow their career.
+
+Encourages team members to move to other projects/teams when necessary for further growth.
+
+May manage compensation for their teams, ensuring it is done fairly and consistently.
+
+Identifies people who are struggling and coaches them to get back on track.
+
+Hiring
+Ensures the team is staffed at the right seniority.
+
+Typically performs hiring manager interviews, ensuring technical excellence and strong values alignment.
+","Team Culture
+Actively builds great morale, ensuring teams have an empowered, creative atmosphere where everybody can contribute ideas and help drive the ship, and removing obstacles that prevent happiness with the company, the job and the work, whether individual or systemic.
+
+People Development
+Ensures engineering managers are following good management practices, giving them the tools to motivate teams, hold quality 1-1s, focus their efforts, and balance their time.
+
+Identifies the next great manager or the next developer who can deliver critical projects and makes the moves to enable their growth.
+
+Ensures compensation and promotions are managed consistently and fairly within their org and in agreement with the rest of the company.
+
+Hiring
+Manages sideways and upwards - represents and advocates for teams and product to the rest of the company, e.g. more capacity, more people, help, clearer focus.
+
+Ensures hiring decisions made consistently and fairly and in agreement with the rest of the company.
+","Team Culture
+Breaks down walls within their teams, and across other teams, to ensure all teams are working together happily for the company's good.
+
+People Development
+Systematic in ensuring all managers under them are on top of growth, promotion, happiness and performance issues.
+
+Identifies and creates opportunities to grow leaders, moving people to other teams if that's what it needs.
+
+Hiring
+Takes a structured approach to determining headcount and organizing their teams, effectively prioritizing across them.
+
+Personally and by influencing the team, promotes the engineering brand externally - e.g. writing blogs, speaking at conferences, etc.
+
+Is the kind of leader who draws others to the company.","Team Culture
+Embodies and encourages our engineering culture and values.
+
+People Development
+Leader of leaders - balances their (Sr-)Directors need for independence with the fact that they also need coaching and mentorship to fully grow into it. Neither protects them from failures, nor over-exposes the company to those failures.
+
+Ensures promotions within their org are fair and timely.
+
+Hiring
+Builds, organizes and staffs teams according to business and technical priorities. Making sure critical initiatives get staffed, owning getting alignment on hard tradeoffs when needed.
+
+Ensures hiring excellence at all levels in their org; preventing a regression to mean.
+
+Personally makes an above-and-beyond impact to hire great leaders to the company - as opposed to just waiting for recruiting.
+
+Ensures the company attracts and retains talent from a broad range of backgrounds and experience."
+Culture & Drive for Improvement,"Participates in company programs like brown bags, conference demos, squads and guilds, mentoring, interviewing, meetups, giving conference talks.",Participates in improving company wide standards around development and operational practices/tools/policies.,Finds areas where shared work and cooperation benefit lots of teams and drives action on them.,Leads programs/initiatives to systematically improve the quality of management across engineering.,"Personally empowers initiatives to systematically and substantially improve the quality of management across engineering - from ideation through to execution. In doing so empowers and trains the next generation of future leaders, as opposed to doing all judgment/leadership themselves."

@@ -1,0 +1,168 @@
+,See introduction in Confluence (link),,,,,
+,Software Engineer,Software Engineer 2,Senior Software Engineer,Staff Engineer,Senior Staff Engineer,Principal Engineer
+Scope & Impact,"Work guided by a manager or more senior peer.
+
+Owns delivering straightforward small solutions independently, and straightforward medium sized solutions with guidance.
+
+Owns one or more components (i.e. units of code, building blocks). May be the technical owner of a small, non-critical system (typically composed of a set of components)","Delivers independently, with limited guidance.
+
+Is the technical owner of one or more non-critical systems.
+
+Owns and delivers small projects or features independently, and medium to large projects with guidance.
+
+Unblocks quickly when faced with a problem they haven't seen before.
+
+Ranges all over the stack, solves hard problems, and ships code daily.","Technical owner of one or more systems, typically focused on major portions of team software.
+
+Starter: can explore new complex problem areas to deliver prototypes and proofs-of-concept.
+
+Finisher: consistently takes projects from ""80% done"" to ""deployed, correct, operable, and maintainable.""
+
+Dodges roadblocks and eliminates ambiguity to unblock on challenging problems.","See also On the role of Staff Engineer at Datadog.
+
+Typically the technical owner of multiple pieces of critical architecture in their area of the business, although depth experts may have a narrower focus.
+
+Owns delivery of the systems they architect from beginning-to-end, doing what it takes to get things shipped and at full scale in production.
+
+Identifies and advocates for novel and valuable product or platform opportunities to better serve our customers and differentiate Datadog. After successful advocacy, owns and ensures the delivery and validation of value with customers.","Typically a technical leader across multiple areas of business or architecture, although depth expert may have narrower focus.
+
+Guides teams across org in anticipation of future use cases and helps them make design decisions that minimize the cost of future changes.
+
+Usually the key technical decision maker in the decision process for their org's major long-term technical decisions and plans.
+","Thrives under ambiguity, charting a successful course for our platform, aligning Engineering and Product Management leaders, and staff and senior staff engineers in doing so.
+
+Independently seeks out the highest leverage multi-org technical challenges limiting our future success, brings together all stakeholders to resolve the product, technical and organizational tradeoffs to come to our best solution, and then leads the full delivery of the result.
+
+"
+Technical Leadership,"Strong focus on improvement, becoming more independent across all areas.
+
+Contributes to team planning and design discussions. Respects others by listening to their ideas and suggestions.","Owns delivery, which includes owning communication within the team and across teams when needed.
+
+Communicates well with their peers, managers, senior, and staff engineers.
+
+May work with their manager or a senior engineer to define a few OKRs that relate to the systems they own.
+
+Partners with cross functional peers and/or customers to understand software requirements and propose solutions.
+
+Provides detailed code reviews for teammates and helps document idioms and best practices.
+
+Mentors interns and early-career new hires.","Technical leader and mentor anchoring a team.
+
+Go-to person on their team to answer questions and technically help new team members.
+
+Works with their manager to define OKRs of the systems they own, and helps decide OKRs across the team.
+
+May be responsible for the planning of a feature or a small project and running the corresponding processes (sprints, standups, etc.)
+
+Learning to delegate, coach, and mentor members of the team so that the overall impact of the team is greater than the Sr. Software Engineer on their own.
+
+Learning to force multiply, i.e. deliver solutions that dramatically increase the effectiveness of the team or technology, and makes everyone more productive.","Technical leader for one or more product areas, commonly paired with an engineering Director for their business area.
+
+Strong technical communicator - go-to person in their area to advise on design problems, helping us learn from what we've built before.
+
+Contributes to architecture discussions across the company, helping us learn from what we've built before.
+
+Educates the team about new technology and approaches in our space, balancing novelty against stability.
+
+Helps teams revisit their technical and product assumptions from first principles, breaks through ambiguity, removes artificial barriers to execution and guides the definition of new architectures.
+
+Negotiates the product and technical requirements to ensure a high quality experience for customers. Has a significant role in shaping the OKRs and team roadmaps. Clearly communicates to leadership on the quality of technical and product goals and our progress towards them.",,
+Culture & Drive for Improvement,"Attends conferences to demo the product.
+
+May start getting involved in some company processes (Demos, Brown Bags).","Attends conferences to demo the product.
+
+Gives Brown Bags and/or Demos of their work.
+
+Participates in the hiring process, delivering clear and concise feedback on candidates.
+
+Learning to provide constructive and empathetic feedback.","Helps the team improve its practices and systems.
+
+Proactively communicates, sharing relevant information to the right parties -- giving bad news quickly, and appropriately seeking direction.
+
+Provides constructive, empathetic feedback to peers and team members. Conscious of how their words and demeanor impact others, especially those with less influence.
+
+Participates in company processes like brown bags, doing demos, doing conference demos, squads and guilds, mentoring, interviewing, meetups, giving conference talks.","Improves company-wide standards around development and operational practices/tools/policies. Participates in high-judgement company processes like Incident Commander and Systems Risk Review. Often leads guilds and meetups aimed at accelerating the development of engineers around them.
+
+Raises the level of productivity of their org by building systems and tools, or introducing policies and patterns.
+
+Demonstrates resistance to shipping the org and organizational dysfunction by pushing teams to work together more efficiently, advocating for adding the right people into the right projects, and quickly escalating organizational dysfunction to leadership.
+
+Calm voice of technical reason both within their team and across teams, ensuring others are heard, feel respected, and are empowered.
+
+Respectful of what got us to this level of success, taking the time to understand it deeply before they lead the change needed to bring us to the next level.","Raises the level of productivity of all engineers at the company by building systems, authoring tools, introducing policies or patterns, or leading squads/guilds.
+
+Promotes the engineering brand externally - e.g. conference presentations, blog posts, drawing referrals.
+
+Coaches and develops senior engineers across their organization. Mentors staff engineers to achieve their next level of growth.","Productively represents the needs of the engineering team to the executive staff.
+
+Great and consistent technical leader inside the company - people point to what they do as the best practices to emulate.
+
+Has clear visibilty outside the company as a technical leader publicly active in the industry community, drawing some of the best in the field to work with them.
+
+Mentors and coaches senior technical leaders company wide."
+General Expertise,"Basic CS skills: familiar with a range of data structures and algorithms, knowledge of coding in one or more languages, limited (but growing) experience in software development to industry standards.
+
+Understands how to test software using a variety of methods.","Has deep, precise and current understanding of at least one relevant technical area (e.g. ""Dataviz in the browser"", ""Go performance tuning"", ""Containers scheduling"", ""AWS Security"", etc).","Has detailed knowledge of team's architecture and technologies, including architecture of coupled peer teams.
+
+Pushes to become a better developer (e.g. independent reading and exploration of new technologies)
+
+","Well-versed in multiple key product components; able to define and contribute to systems in multiple areas of the product.
+
+Up to date on evolving standards, platform features, and critical vendor and community-provided technologies.","Understands company architecture in and interacting with their area of leadership.
+
+Has deep and broad knowledge of current and emerging technologies, demonstrated through introducing high value new ones that get adopted widely.","Is an industry leader in a technical area which brings high value to the company. Pushes our technical boundaries through introducing  innovations that bring an inordinate amount of value compared to what we did before.
+
+"
+Design,"Designs components with an awareness of overall architecture, avoiding duplication across codebases and interface-breaking changes.
+
+Needs the solution design, project expectations, and other software requirements to be well-defined by more senior engineers.","Owns designs of entire features at the class/module layer, ensuring they fit well within the system design. In doing so able to independently tackle immediate design problems and resolve vague project requirements by working with collaborators.
+
+Understands the users of the software they build, and develops designs that deliver a great user experience.
+
+Needs the overall product and technology strategy to be well defined by more senior engineers. Collaborates with them to fit their work into it.","Designs systems with well-considered architecture, fitting it in the broader architecture in the team and across their organization. Strong technical communicator using formal (i.e. RFCs) and informal (e.g. asking other engineers) mechanisms to get alignment and agreement from all needed stakeholders.
+
+Advocates for users of their team's software, consistently pushing to improve user experience.
+
+Able to break features into components to be developed in parallel by other engineers on the team.","Designs architecture that stands up to our next level of scale, operates with predictable SLIs, and has a large positive impact on our business. Features of such projects are multi-system/multi-team features, deep technical challenges, high ambiguity. Example projects might include designing and building a new data storage engine, building a large new product, or rebuilding a critical service to eliminate a fundamental constraint for the business.
+
+Deconstructs cross-cutting architectural changes into feature asks to be owned and developed by the different teams owning each system.
+
+Enables teams to adopt a user-centric design approach, guaranteeing strong focus on user experience while iterating efficiently to improve it.
+
+Uses expertise and judgment to determine the right stakeholders and which input to incorporate into designs - doesn't avoid seeking out alignment with those who know will have reasons to disagree.","Anticipates and designs the next generation of our critical systems, balancing business needs with technical constraints. These are very large, significantly complex, having an outsized impact on our business, multi-system/multi-org features, deep technical challenges, high ambiguity. They set the foundation for years to come.
+
+Deconstructs large architecture into systems to be owned and developed by different teams.
+
+Resolves cross-org long-term architecture problems in achieving alignment on what they build.
+
+
+",Has experience with mapping engineering architecture across an engineering organization design. Constructs cohesive architectures developed and owned by multiple teams with strong interfaces that allows teams the right independence and accountability over time.
+Coding,Ships maintainable code with guidance.,"Strong programmer: ships modular, maintainable code with guidance.
+
+Leaves code in better shape than before.","Great programmer: consistently ships modular, maintainable code with no guidance.
+
+Leaves code in substantially better shape than before.",Excellent programmer — consistently delivers high quality code that serves as a model for others.,,
+Performance & Efficiency,Understands the performance and is developing an understanding of the cost profile of what they develop.,Understands the performance and cost profiles of the components they deliver; proposing and implementing new performance and cost optimizations that have impact.,"Understands the performance and cost profiles of the systems they own, including all dependencies; consistently delivering performance and cost optimizations.","Dives deep into performance and cost on their systems; inventing new approaches that bring efficiency at scale.
+
+To achieve impact, may focus on a single system and bring order of magnitude cost/scale/performance improvements.","Delivered systems are exemplary in terms of robustness, stability, scalability, performance and cost-effectiveness.",
+Operations,"Works with guidance to ensure the code they ship runs smoothly in production (and handles ops issues when it doesn't).
+
+Improves team documentation.
+
+May start participating in the team's on-call and/or support rotation.","Owner: Ensures the code they ship runs smoothly in production (and handles ops issues when it doesn't).
+
+Participates in the team's on-call and/or support rotation.","Owns their systems operationally, fully accountable for their operation in production, even when worked on by others.
+
+Debugs and solves challenging cross-system issues in production.","Takes responsibility for the systems they own. Stays operationally engaged week-to-week, and is a critical part of hands-at-keyboard incident response. May transition to an escalation rotation after developing a deep, hands-on understanding of operations at Datadog.
+
+Resolves organizational ambiguity around root cause ownership, driving cross-org communication and action on complex post-mortems.",,
+"People Management
+[OPTIONAL]",N/A,N/A,"May manage a small team, typically 2 to 4 engineers, keeping them happy, challenged, motivated, and growing professionally.
+
+Quickly learns how to balance effective management and hands-on technical contribution. May initially focus on developing management skills at the expense of hands-on engineering work, but quickly returns to technical contributions consistent with their level.
+
+Helps identify career growth opportunities.
+
+Identifies people who are struggling and with guidance from more senior management, coaches them to get back on track.
+
+Monitors progress and provides direct and regular feedback to team members. ",,,
