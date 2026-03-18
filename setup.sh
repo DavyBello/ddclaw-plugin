@@ -255,7 +255,7 @@ write_file "context/projects/README.md" "# Projects
 
 | Project | Status | What's Next |
 |---------|--------|-------------|
-| (use /add-project to add projects) | | |
+| (use /ddclaw:add-project to add projects) | | |
 
 ## Blocked
 
