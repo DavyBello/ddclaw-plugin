@@ -22,7 +22,7 @@ If `context/config.md` doesn't exist or is missing the standup section, ask the 
 - If an argument is provided, parse it as a date (`YYYY-MM-DD`, or relative: `yesterday`, `today`, day name like `friday`).
 - If no argument, default to **yesterday**.
 - Store the resolved date as `TARGET_DATE` (YYYY-MM-DD format).
-- Check if `context/standups/TARGET_DATE.md` already exists. If it does, skip to step 5 (context update only) and note that the standup file already existed.
+- Check if `context/standups/TARGET_DATE.md` already exists. If it does, skip to step 6 (context update only) and note that the standup file already existed.
 
 ## 2. Find the standup message
 
@@ -39,9 +39,9 @@ Scan the returned messages for the standup bot post matching `TARGET_DATE`:
 
 **If the standup post for TARGET_DATE is not in the first page:** Use the `oldest` parameter to narrow the time range, or paginate with the `cursor` returned. For dates more than a few days back, calculate an approximate Unix timestamp for the start of that day and use it as `oldest`.
 
-**Tip for Unix timestamp calculation:** `TARGET_DATE` at 00:00 CET (Europe/Madrid) can be computed with:
+**Tip for Unix timestamp calculation:** Calculate the Unix timestamp for `TARGET_DATE` at 00:00 in the user's timezone. Cross-platform:
 ```
-date -j -f "%Y-%m-%d %H:%M:%S %z" "TARGET_DATE 00:00:00 +0100" "+%s"
+python3 -c "from datetime import datetime; import time; print(int(datetime.strptime('TARGET_DATE', '%Y-%m-%d').timestamp()))"
 ```
 
 ## 3. Read the thread
