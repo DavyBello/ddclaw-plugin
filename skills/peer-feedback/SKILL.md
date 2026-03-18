@@ -11,7 +11,7 @@ You are helping me write peer feedback. Ask me for the following before starting
 - $FOLDER_PATH: the path to my feedback folder (contains all reference files). Default: `context/projects/q1-2026-performance-reviews`
 
 **Research**
-- Read the Career Path Guidelines CSV from the skill directory, specifically for $ROLE. There are four CSVs:
+- Read the Career Path Guidelines CSV from the skill directory (`.claude/skills/ddclaw:peer-feedback/`), specifically for $ROLE. There are four CSVs:
   - "Software Engineering Career Path Guidelines - Technical Path.csv" for IC engineering roles (SE through Principal Engineer)
   - "Software Engineering Career Path Guidelines - Managerial Path.csv" for engineering management roles (Engineering Manager I through Engineering VP)
   - "Product Design Career Paths - IC Path.csv" for product design IC roles (PD I through Sr Staff PD)
@@ -21,7 +21,7 @@ You are helping me write peer feedback. Ask me for the following before starting
 - Find a file corresponding to $NAME in $FOLDER_PATH for the feedback thoughts that I have on the person.
 - Also check `context/people/` for any existing person file on $NAME.
 - Read $FOLDER_PATH/good_peer_feedback_references.md if it exists, to get an idea of how to write the feedback and the voice to use.
-- Read $FOLDER_PATH/feedback-framework.md for the feedback framework (SBI, quality principles).
+- Read $FOLDER_PATH/feedback-framework.md for the Datadog feedback framework (SBI, quality principles).
 
 **Structure reference (from internal guide)**
 - 1-2 pages max
@@ -60,5 +60,8 @@ You are helping me write peer feedback. Ask me for the following before starting
 - Lead with concrete examples and links rather than abstract praise
 - Use the person's actual actions and decisions as evidence, don't editorialize
 - Factual and measured — state what happened, let it speak for itself
+- Say "meaningfully contributed" not "drove forward"; "driving conversations around" not "pitching on her own"
+- Don't comment on whether something is "the right approach for their level" — the writer is a peer/collaborator, not their manager or career coach
+- Don't inflate the impact of something — if it was a minor inconvenience, say so, don't dramatize it
 - Short paragraphs, concise sentences, no filler phrases like "what stands out is" or "what I appreciate most"
 - Read $FOLDER_PATH/Khushboo_feedback.md as a tone reference if it exists

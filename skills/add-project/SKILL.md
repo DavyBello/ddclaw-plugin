@@ -15,5 +15,5 @@ Create a new project folder for "$ARGUMENTS":
    - Key people involved
    - Current priority items
 4. Fill in what I provide, leave the rest empty
-5. Add the project to `context/projects/README.md` under the appropriate status section (Active/Blocked/Paused) in alphabetical order
+5. Add the project to `context/projects/README.md` under the appropriate status section (Active/Blocked/Paused) in alphabetical order, format: `- \`$ARGUMENTS/\` — <one-line description>`
 6. Show me the created file

@@ -1,6 +1,6 @@
 ---
 name: ddclaw:action-items
-description: Show all open action items across projects, people, sprints, and recent memory
+description: Show all open action items across projects, people, sprints, and recent memory. Use when user says "action items", "what's open", "open items", "todos", or "what do I need to do".
 ---
 
 Aggregate and display all open action items. Search these locations:
@@ -17,11 +17,15 @@ Group by source, skip completed items (`- [x]`). Show the file path for each gro
 ```
 ## Projects
 **dashboard-investigation/** (context/projects/dashboard-investigation/README.md)
-- [ ] Item description
+- [ ] Customer validation — Mehdi flagged growing uncertainty
+- [ ] Sync with cmd+i EM
+
+**webps-7179/** (context/projects/webps-7179-hide-query-bug/README.md)
+- [ ] Get PR approved and merged
 
 ## People
-**person-name/** (context/people/person-name/README.md)
-- [ ] Item description
+**marcela-ramirez/** (context/people/marcela-ramirez/README.md)
+- [ ] Self-assessment/feedback using Claude
 
 ## Sprints
 ...

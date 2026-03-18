@@ -1,6 +1,6 @@
 ---
 name: ddclaw:weekly-review
-description: End-of-week review — what happened, what's stale, what needs attention next week
+description: End-of-week review — what happened, what's stale, what needs attention next week. Use when user says "weekly review", "end of week", or "week in review".
 ---
 
 Run through this checklist and present findings. Be honest — flag what's slipping, not just what got done.
@@ -20,10 +20,10 @@ Read all memory files from the past 7 days (`memory/YYYY-MM-DD.md`). Summarize:
 Run `/action-items` to get the full list. Flag any items that:
 - Have been open for more than 7 days (check when they first appeared in memory or project files)
 - Were carried over from last week without progress
-- Are assigned to the user specifically (not delegated)
+- Are assigned to Ladi specifically (not delegated)
 
 ## 3. Person file health check
-For each direct report in `context/people/README.md`:
+For each direct report in `context/people/README.md` (DNV Team section):
 - Read their person file
 - Flag if Working Style, Strengths, or Current Focus are empty stubs
 - Flag if "Open Items" or "Things to Discuss" haven't been updated in over 2 weeks

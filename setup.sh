@@ -17,7 +17,7 @@ YELLOW='\033[0;33m'
 CYAN='\033[0;36m'
 RESET='\033[0m'
 
-step() { echo -e "\n${BOLD}${CYAN}[$1/5]${RESET} ${BOLD}$2${RESET}"; }
+step() { echo -e "\n${BOLD}${CYAN}[$1/6]${RESET} ${BOLD}$2${RESET}"; }
 created() { echo -e "  ${GREEN}+${RESET} $1"; }
 skipped() { echo -e "  ${DIM}skip${RESET} $1 (already exists)"; }
 
@@ -119,7 +119,6 @@ bullshit.
 ## Who I Am
 - ${USER_NAME} -- ${USER_ROLE} @ ${USER_COMPANY}
 - Timezone: ${USER_TZ}
-- I'm time-constrained
 - I prefer action over discussion
 - When I say \"yes,\" move fast -- don't re-discuss
 
@@ -154,10 +153,7 @@ No \"mental notes\" -- if it matters, it goes in a file
 - Lesson learned from a mistake
 
 ### Manual save
-When I say \"save\", \"done\", or \"wrap up\":
-- Review the conversation for anything not yet logged
-- Append remaining items to memory/YYYY-MM-DD.md
-- Confirm what you saved
+When I say \"save\", \"done\", or \"wrap up\" -- use the \`/ddclaw:save\` skill.
 
 ### Curation
 If I say \"curate memory\":
@@ -172,29 +168,12 @@ If I say \"curate memory\":
 - \`context/projects/*/README.md\` -- active work, sprint status (one folder per project)
 - \`context/people/*/README.md\` -- one folder per person
 - \`context/people/README.md\` -- index of who's who
-- \`context/self/feedback.md\` -- personal feedback tracker
+- \`context/self/feedback.md\` -- management feedback tracker (strengths, growth areas, patterns)
 - \`jira/README.md\` -- board structure, conventions
 
 Read the relevant file when context is needed. Don't guess.
 
 ## Behavioral Triggers
-
-### \"prep for [name]\"
-- Read their person file from context/people/
-- Check recent memory for anything involving them
-- Surface: open action items, growth goals, things to
-  discuss, any flags
-- Draft an agenda
-
-### \"prep for [meeting]\"
-- Pull relevant project/org context
-- Draft talking points and questions
-- Flag any decisions needed
-
-### \"catch me up\"
-- Open PRs needing review (via \`gh\`)
-- Action items from recent memory
-- Any blockers noted in memory
 
 ### \"research [topic]\"
 - Go deep, cite sources
@@ -221,8 +200,11 @@ Read the relevant file when context is needed. Don't guess.
 - Push back when you see flaws, but don't be contrarian
   for sport
 - No \"Great question!\" or \"I'd be happy to help!\" -- just help
-- When writing code: read \`context/CODING.md\` first
-- Flag incomplete or inconsistent information upfront"
+- When writing code: read \`context/CODING.md\` first, use superpowers:brainstorming skill before creative work
+- Flag incomplete or inconsistent information -- if you can't
+  fetch something, notice a missing reference (skill, file,
+  tool), or see something that doesn't match reality, say
+  so upfront rather than proceeding silently"
 
 write_file "CLAUDE.md" "$AGENT_INSTRUCTIONS"
 
@@ -398,7 +380,52 @@ write_file "jira/README.md" "# Jira
 "
 
 # ─────────────────────────────────────────────────────────
-step 5 "Write .gitignore and settings"
+step 5 "Team config (optional)"
+# ─────────────────────────────────────────────────────────
+
+echo ""
+read -rp "Do you manage a team? [y/N] " HAS_TEAM
+HAS_TEAM="${HAS_TEAM:-N}"
+
+if [[ "$HAS_TEAM" =~ ^[Yy]$ ]]; then
+  read -rp "Slack standup channel ID (e.g. C08MHL0GFJ7): " SLACK_CHANNEL_ID
+  read -rp "Slack workspace ID (e.g. E023QM6JUS0): " SLACK_WORKSPACE_ID
+  read -rp "Slack channel name (e.g. #my-team-standup): " SLACK_CHANNEL_NAME
+  read -rp "Team member first names, comma-separated: " TEAM_MEMBERS
+
+  write_file "context/config.md" "# Team Config
+
+## Identity
+- GitHub username: (auto-detected via \`gh api user\`)
+
+## Standup
+- Slack channel ID: ${SLACK_CHANNEL_ID}
+- Slack workspace ID: ${SLACK_WORKSPACE_ID}
+- Channel name: ${SLACK_CHANNEL_NAME}
+- Team members: ${TEAM_MEMBERS}
+
+## Reviews
+- Review folder: (set per review cycle, e.g. \`context/projects/q1-2026-performance-reviews\`)
+"
+else
+  write_file "context/config.md" "# Team Config
+
+## Identity
+- GitHub username: (auto-detected via \`gh api user\`)
+
+## Standup
+- Slack channel ID:
+- Slack workspace ID:
+- Channel name:
+- Team members:
+
+## Reviews
+- Review folder:
+"
+fi
+
+# ─────────────────────────────────────────────────────────
+step 6 "Write .gitignore and settings"
 # ─────────────────────────────────────────────────────────
 
 write_file ".gitignore" "# Daily memory logs (personal)
@@ -445,6 +472,7 @@ echo "  CLAUDE.md              Your agent's instructions"
 echo "  AGENTS.md              Same instructions (Codex/agent compatibility)"
 echo "  LONG_TERM.md           Curated cross-session memory"
 echo "  memory/                Daily session logs (auto-managed)"
+echo "  context/config.md      Team config (Slack, roster, reviews)"
 echo "  context/CODING.md      Coding rules template"
 echo "  context/projects/      One folder per project"
 echo "  context/people/        One folder per person"
@@ -456,29 +484,35 @@ echo "  .claude/settings.json  Permissions"
 echo ""
 echo -e "${BOLD}Install the ddclaw plugin (skills + hooks):${RESET}"
 echo ""
+echo "  # Add the Datadog marketplace (run in terminal):"
+echo "  claude plugin marketplace add https://github.com/DataDog/claude-marketplace"
+echo ""
+echo "  # Then start Claude Code and install the plugin:"
 echo "  cd '${AGENT_DIR}'"
 echo "  claude"
-echo "  # Then inside Claude Code:"
-echo "  /install-plugin https://github.com/DavyBello/ddclaw-plugin"
-echo ""
-echo -e "${BOLD}Or install from marketplace (once available):${RESET}"
-echo ""
-echo "  /plugin marketplace add DavyBello/ddclaw-marketplace"
-echo "  /plugin install ddclaw@ddclaw-marketplace"
+echo "  /plugin install ddclaw@datadog-claude-plugins"
 echo ""
 echo -e "${BOLD}Skills provided by the plugin:${RESET}"
 echo ""
 echo "  /prep <name>             Prep for a 1:1 or meeting"
 echo "  /save                    Save session context to memory"
 echo "  /catch-me-up             Get a status briefing (PRs, blockers, action items)"
+echo "  /my-prs                  Fetch PRs assigned to you personally"
 echo "  /action-items            See all open action items"
 echo "  /add-person <name>       Add someone you work with"
 echo "  /add-project <name>      Track a project"
 echo "  /sync-context            Sync index files with folder contents"
 echo "  /weekly-review           End-of-week review and health check"
 echo "  /peer-feedback <name>    Generate structured peer feedback"
+echo "  /manager-evaluation      Write a manager evaluation for a report"
+echo "  /get-standup [date]      Fetch standup from Slack (needs config)"
 echo ""
 echo -e "${BOLD}Optional next steps:${RESET}"
+echo ""
+echo "  - Install recommended plugins:"
+echo "    /plugin marketplace add obra/superpowers"
+echo "    /plugin install superpowers@obra-superpowers"
+echo "    /plugin install episodic-memory@superpowers-marketplace"
 echo ""
 echo "  - Add MCP servers for Jira, Datadog, etc:"
 echo "    claude mcp add datadog -- npx -y @anthropic/datadog-mcp-server"

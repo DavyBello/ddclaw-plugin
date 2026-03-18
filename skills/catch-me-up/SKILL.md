@@ -1,25 +1,12 @@
 ---
 name: ddclaw:catch-me-up
-description: Quick briefing — PRs, action items, blockers, and anything that needs attention
+description: Quick briefing — PRs, action items, blockers, and anything that needs attention. Use when user says "catch me up", "what did I miss", or "briefing".
 ---
 
 Run through this checklist and present a concise briefing:
 
-## 1. PRs needing review
-
-First, get the current GitHub username:
-```bash
-gh api user --jq .login
-```
-
-Then use it to check PRs:
-```bash
-gh search prs --review-requested={username} --state=open --json title,url,repository,updatedAt
-```
-Also check for PRs authored by the user that have new reviews or comments:
-```bash
-gh search prs --author={username} --state=open --json title,url,repository,reviewDecision,updatedAt
-```
+## 1. PRs
+Run the `/my-prs` skill to get PRs personally assigned to me (filtered from team assignments) and my own open PRs.
 
 ## 2. Open action items
 Run the `/action-items` skill to get all pending items across projects, people, sprints, and recent memory.

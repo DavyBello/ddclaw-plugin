@@ -1,0 +1,37 @@
+{
+  "description": "Memory persistence hooks — auto-load context at start, remind to save on compact/stop",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/session-start-memory.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[MEMORY SAVE REQUIRED] Context compacting. Save decisions, action items, and context to memory/'$(date +%Y-%m-%d)'.md now.'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[MEMORY SAVE REQUIRED] Session ending. Save remaining decisions and context to memory/'$(date +%Y-%m-%d)'.md.'"
+          }
+        ]
+      }
+    ]
+  }
+}

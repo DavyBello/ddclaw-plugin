@@ -1,6 +1,6 @@
 ---
 name: ddclaw:save
-description: Save session notes to daily memory file
+description: Save session notes to daily memory file. Use when user says "save", "save to memory", "done", or "wrap up".
 ---
 
 Wrap up this session:

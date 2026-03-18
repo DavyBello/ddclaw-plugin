@@ -1,6 +1,6 @@
 ---
 name: ddclaw:prep
-description: Prepare for a person or meeting
+description: Prepare for a 1:1 or meeting — pull context, surface action items, draft agenda. Use when user says "prep for [name]", "prep for [meeting]", or "prepare for [name]".
 argument-hint: <person-name or meeting-name>
 ---
 

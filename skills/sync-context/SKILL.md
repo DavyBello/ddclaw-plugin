@@ -1,6 +1,6 @@
 ---
 name: ddclaw:sync-context
-description: Sync index README files with their child folders and resolve content discrepancies
+description: Sync index README files with their child folders and resolve content discrepancies. Use when user says "sync context", "audit files", or "check consistency".
 ---
 
 Two passes: first sync indexes with folder contents, then audit for content discrepancies. Fix what's unambiguous, flag what needs a decision.
@@ -12,10 +12,10 @@ Two passes: first sync indexes with folder contents, then audit for content disc
 ### 1a. People index (`context/people/README.md`)
 
 - List all folders in `context/people/` (excluding `_TEMPLATE.md`)
-- Compare against the index in `context/people/README.md`
-- For each folder NOT in the index: read its `README.md` header (Role, Team, Reports to) and add it to the correct subsection
+- Compare against the "Who's Who" section in `context/people/README.md`
+- For each folder NOT in the index: read its `README.md` header (Role, Team, Reports to) and add it to the correct subsection (DNV Team, Managers, or Key Partners)
 - For each index entry whose folder doesn't exist: flag for removal
-- Preserve the existing grouping structure
+- Preserve the existing grouping structure (DNV Team, Managers, Key Partners)
 
 ### 1b. Projects index (`context/projects/README.md`)
 
@@ -41,8 +41,9 @@ Read every context file listed below and cross-reference for inconsistencies. Fo
 
 For each person in the people index:
 - Read their `README.md` header fields (Role, Team, Reports to, Location)
-- Compare against their index line
+- Compare against their index line (e.g., `SE3, Remote Virginia`)
 - Flag if: role, team, location, or reporting relationship doesn't match
+- Flag if: person is in wrong index group (e.g., listed under "Key Partners" but file says "Reports to: Ladi Bello" → should be DNV Team)
 
 ### 2b. Projects: index vs file content
 
@@ -52,14 +53,14 @@ For each project in the projects index:
 - Compare the "What's Next" column against the project's "Current Priorities" section — flag if the index describes work that's already done or no longer relevant
 - Flag if project Status is "active" but the last History entry is older than 3 weeks (stale active project)
 
-### 2c. People <-> Projects cross-reference
+### 2c. People ↔ Projects cross-reference
 
 - Check each project's "People" field against the people index — flag anyone listed in a project who doesn't have a person folder
 - Check each person's "Current Focus" section — flag if it references a project that no longer exists or has been completed/paused
 
-### 2d. Org Context consistency
+### 2d. ORG.md consistency
 
-- Read `context/org/README.md`
+- Read `context/ORG.md`
 - Flag if team members listed there don't match the people index
 - Flag if products/objectives listed there contradict active project descriptions
 
@@ -91,7 +92,7 @@ For **ambiguous discrepancies** (conflicting information, unclear which source i
 **Sprints:** latest is [filename] ([age])
 
 ### Discrepancies Fixed
-- [file]: [what was wrong] -> [what it is now]
+- [file]: [what was wrong] → [what it is now]
 
 ### Discrepancies Needing Resolution
 1. **[short label]**
