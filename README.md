@@ -66,6 +66,12 @@ These pair well with ddclaw:
   /plugin install episodic-memory@superpowers-marketplace
   ```
 
+## Recommended MCP servers
+
+- **Slack MCP** — required for `/get-standup`. Gives Claude direct access to read channels, threads, search messages, and send drafts. Without it, standup fetching won't work.
+  - **Datadog employees:** Follow the [Slack MCP setup guide](https://datadoghq.atlassian.net/wiki/spaces/EITAI/pages/6379767120/Using+Claude+and+Cursor+with+Slack+MCP+at+Datadog#Part-2%3A-Connecting-Claude-Code-(CLI)-to-Slack)
+  - **Others:** Configure a Slack MCP server that provides `slack_read_channel`, `slack_read_thread`, and `slack_search_public` tools
+
 ## Using with other AI tools
 
 The core memory system works with any AI coding tool that reads markdown files. `CLAUDE.md` provides instructions for Claude Code, while `AGENTS.md` contains the same instructions for tools like OpenAI Codex that look for that filename.

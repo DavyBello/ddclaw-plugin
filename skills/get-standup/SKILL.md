@@ -10,13 +10,11 @@ Fetch the async standup thread from Slack, extract each person's updates, save a
 
 Read `context/config.md` for:
 - `Slack channel ID` -- the channel to fetch from
-- `Slack workspace ID` -- the workspace
 - `Channel name` -- for display
 - `Team members` -- the expected roster (used to flag who's missing)
 
 If `context/config.md` doesn't exist or is missing the standup section, ask the user to provide:
 - Slack channel ID (e.g. C08MHL0GFJ7)
-- Slack workspace ID (e.g. E023QM6JUS0)
 - Team member names (comma-separated)
 
 ## 1. Parse date
@@ -24,94 +22,70 @@ If `context/config.md` doesn't exist or is missing the standup section, ask the 
 - If an argument is provided, parse it as a date (`YYYY-MM-DD`, or relative: `yesterday`, `today`, day name like `friday`).
 - If no argument, default to **yesterday**.
 - Store the resolved date as `TARGET_DATE` (YYYY-MM-DD format).
-- Check if `context/standups/TARGET_DATE.md` already exists. If it does, skip to step 7 (context update only) and note that the standup file already existed.
+- Check if `context/standups/TARGET_DATE.md` already exists. If it does, skip to step 5 (context update only) and note that the standup file already existed.
 
-## 2. Navigate to Slack
+## 2. Find the standup message
 
-Open the team channel via Playwright using the channel and workspace IDs from config:
-
-```
-browser_navigate -> https://app.slack.com/client/$WORKSPACE_ID/$CHANNEL_ID
-```
-
-Wait 3-5 seconds for the page to fully load, then take a snapshot:
+Use the Slack MCP tool to read recent messages from the channel:
 
 ```
-browser_snapshot -> filename: .tmp-experimental/slack-standup-channel.md
+slack_read_channel(channel_id=CHANNEL_ID, limit=20, response_format="detailed")
 ```
 
-## 3. Find the standup message
+Scan the returned messages for the standup bot post matching `TARGET_DATE`:
+- Look for a message from the bot (usually `B08NFHF1VCG` or similar bot ID) containing "async daily update"
+- Match by the message timestamp date — convert the message's datetime to a date and compare with `TARGET_DATE`
+- Note the `Message TS` value — this is needed to read the thread
 
-Search the snapshot for the standup workflow message matching `TARGET_DATE`.
+**If the standup post for TARGET_DATE is not in the first page:** Use the `oldest` parameter to narrow the time range, or paginate with the `cursor` returned. For dates more than a few days back, calculate an approximate Unix timestamp for the start of that day and use it as `oldest`.
 
-**How to match the date:**
-- Slack shows relative dates: "Today", "Yesterday", or full dates like "Feb 20th at 11:00:09 AM"
-- Calculate what Slack would show for `TARGET_DATE` relative to today
-- Look for a `listitem` containing both:
-  - A workflow-style message (button with `WORKFLOW` badge)
-  - A timestamp link matching the target date
-- The message will have a `button "N replies"` -- note its `ref` attribute
-
-**If the message is not visible:** The channel may need scrolling. Try the "Jump to date" button if present, or scroll up to find older messages.
-
-**If there are multiple standup messages visible** (e.g., today's and yesterday's), match by the timestamp link text or the date separator heading above the message.
-
-## 4. Open the thread
-
-Click the "N replies" button on the matched standup message:
-
+**Tip for Unix timestamp calculation:** `TARGET_DATE` at 00:00 CET (Europe/Madrid) can be computed with:
 ```
-browser_click -> ref: [the ref from step 3], element: "N replies button on standup message"
+date -j -f "%Y-%m-%d %H:%M:%S %z" "TARGET_DATE 00:00:00 +0100" "+%s"
 ```
 
-Wait 2-3 seconds for the thread panel to load, then take a snapshot:
+## 3. Read the thread
+
+Use the thread's parent message timestamp to fetch all replies:
 
 ```
-browser_snapshot -> filename: .tmp-experimental/slack-standup-thread.md
+slack_read_thread(channel_id=CHANNEL_ID, message_ts=STANDUP_TS, response_format="detailed")
 ```
 
-**Important:** Do NOT try to navigate directly to a thread URL -- Slack often shows "Couldn't load thread". Always click the replies button from the channel view.
+This returns the parent message and all replies with author names, user IDs, timestamps, and full message content.
 
-## 5. Extract thread content
+## 4. Extract thread content
 
-Read/grep the thread snapshot file. The thread panel appears as:
-
-```
-list "Thread in $CHANNEL_NAME (private channel, N replies)"
-```
-
-For each `listitem` in the thread (skip the first one -- that's the workflow prompt message):
-- **Author:** Look for `button "Name"` in the message header
-- **Time:** Look for `link "Yesterday at H:MM:SS PM"` or similar
-- **Content:** The `generic` elements after the author/time contain the message text, including:
+For each reply in the thread (skip the parent — that's the bot prompt):
+- **Author:** From the message sender name
+- **Time:** From the message timestamp
+- **Content:** The full message text, including:
   - Plain text content
-  - `link` elements with URLs (PRs, Jira tickets)
-  - `list` / `listitem` elements for bullet points
-  - `code` elements for inline code
+  - URLs (PRs, Jira tickets)
+  - Bullet points and formatting
+  - Any "Yesterday" / "Today" / "Friday" headers within individual updates
 
 Extract each person's update preserving:
 - Bullet point structure
 - PR numbers and links (e.g., `#273582`, `PROJ-407`)
 - Jira ticket references (e.g., `PROJ-393`)
-- Any "Yesterday" / "Today" / "Friday" headers within individual updates
 
-**Note who's missing.** Compare against the team members list from config. Flag anyone not in the thread, and check the channel snapshot for separate messages from them (e.g., sick notices).
+**Note who's missing.** Compare against the team members list from config. Flag anyone not in the thread. Also check the channel messages (from step 2) for separate messages from missing people (e.g., sick notices, OOO).
 
-## 6. Get the Slack URL
-
-Find the source URL of the standup workflow message from its timestamp link in the snapshot. It will be in the format:
+**Build the Slack URL** from the channel ID and parent message timestamp:
 ```
-https://dd.slack.com/archives/$CHANNEL_ID/p[timestamp]
+https://dd.slack.com/archives/CHANNEL_ID/pTIMESTAMP
 ```
+Where TIMESTAMP is the message_ts with the dot removed (e.g., `1773824415.151599` → `p1773824415151599`).
 
-## 7. Save standup file
+## 5. Save standup file
 
 Write to `context/standups/TARGET_DATE.md` using this format:
 
 ```markdown
 # TARGET_DATE Standup
 
-Source: [slack URL from step 6]
+Source: [slack URL from step 4]
 
 ## [Name] ([time])
 - [bullet points of their update]
@@ -123,11 +97,11 @@ Source: [slack URL from step 6]
 
 Preserve PR links as `#NNNNN`, Jira tickets as `PROJ-NNN`. Keep the content faithful to what was posted -- summarize lightly but don't lose detail.
 
-## 8. Update context files - **PEOPLE, SPRINTS, PROJECTS**
+## 6. Update context files - **PEOPLE, SPRINTS, PROJECTS**
 
 Read each relevant context file before editing. Only update where the standup provides **new information not already captured**.
 
-### 8a. Person files (`context/people/*/README.md`)
+### 6a. Person files (`context/people/*/README.md`)
 
 For each person who posted in the standup:
 - **Current Focus:** Update if the standup reveals new work started, significant progress, or a shift in priorities not already reflected.
@@ -137,21 +111,25 @@ For each person who posted in the standup:
 
 Skip updating a person file if their standup is routine and everything is already captured.
 
-### 8b. Sprint file (latest in `context/sprints/`)
+### 6b. Sprint file (latest in `context/sprints/`)
 
 - Update commitment statuses where standup shows a task moved to done or a new blocker appeared.
 - Update risks if standup reveals new information.
 
-### 8c. Project files (`context/projects/*/README.md`)
+Skip if their update is routine and already captured.
+
+### 6c. Project files (`context/projects/*/README.md`)
 
 - Append a dated standup summary to the **History** section of the main relevant project. Keep it concise -- one line per person.
 - If the standup reveals a project milestone or completion, update **Current Priorities**.
 
-### 8d. Memory file
+Skip if their update is routine and already captured.
+
+### 6d. Memory file
 
 Append a brief note to `memory/YYYY-MM-DD.md` (today's date) recording that the standup was fetched and which files were updated.
 
-## 9. Report
+## 7. Report
 
 Output a summary:
 
@@ -172,7 +150,3 @@ Output a summary:
 ### Skipped (no meaningful update needed)
 - [files where standup didn't add new info]
 ```
-
-## Cleanup
-
-After completion, the temporary snapshot files in `.tmp-experimental/` can be left in place (they'll be overwritten on the next run).
