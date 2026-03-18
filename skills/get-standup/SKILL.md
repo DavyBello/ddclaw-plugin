@@ -91,8 +91,8 @@ For each `listitem` in the thread (skip the first one -- that's the workflow pro
 
 Extract each person's update preserving:
 - Bullet point structure
-- PR numbers and links (e.g., `#273582`, `DNV-407`)
-- Jira ticket references (e.g., `DNV-393`)
+- PR numbers and links (e.g., `#273582`, `PROJ-407`)
+- Jira ticket references (e.g., `PROJ-393`)
 - Any "Yesterday" / "Today" / "Friday" headers within individual updates
 
 **Note who's missing.** Compare against the team members list from config. Flag anyone not in the thread, and check the channel snapshot for separate messages from them (e.g., sick notices).
@@ -121,7 +121,7 @@ Source: [slack URL from step 6]
 - **[Name]** -- [reason if known, e.g., "posted separately that they were sick", or "no post"]
 ```
 
-Preserve PR links as `#NNNNN`, Jira tickets as `DNV-NNN`. Keep the content faithful to what was posted -- summarize lightly but don't lose detail.
+Preserve PR links as `#NNNNN`, Jira tickets as `PROJ-NNN`. Keep the content faithful to what was posted -- summarize lightly but don't lose detail.
 
 ## 8. Update context files - **PEOPLE, SPRINTS, PROJECTS**
 

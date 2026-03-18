@@ -13,9 +13,9 @@ Two passes: first sync indexes with folder contents, then audit for content disc
 
 - List all folders in `context/people/` (excluding `_TEMPLATE.md`)
 - Compare against the "Who's Who" section in `context/people/README.md`
-- For each folder NOT in the index: read its `README.md` header (Role, Team, Reports to) and add it to the correct subsection (DNV Team, Managers, or Key Partners)
+- For each folder NOT in the index: read its `README.md` header (Role, Team, Reports to) and add it to the correct subsection (Direct Reports, Key Partners, or Leadership)
 - For each index entry whose folder doesn't exist: flag for removal
-- Preserve the existing grouping structure (DNV Team, Managers, Key Partners)
+- Preserve the existing grouping structure (Direct Reports, Key Partners, Leadership)
 
 ### 1b. Projects index (`context/projects/README.md`)
 
@@ -43,7 +43,7 @@ For each person in the people index:
 - Read their `README.md` header fields (Role, Team, Reports to, Location)
 - Compare against their index line (e.g., `SE3, Remote Virginia`)
 - Flag if: role, team, location, or reporting relationship doesn't match
-- Flag if: person is in wrong index group (e.g., listed under "Key Partners" but file says "Reports to: Ladi Bello" → should be DNV Team)
+- Flag if: person is in wrong index group (e.g., listed under "Key Partners" but file says they report to the user → should be Direct Reports)
 
 ### 2b. Projects: index vs file content
 
@@ -58,9 +58,9 @@ For each project in the projects index:
 - Check each project's "People" field against the people index — flag anyone listed in a project who doesn't have a person folder
 - Check each person's "Current Focus" section — flag if it references a project that no longer exists or has been completed/paused
 
-### 2d. ORG.md consistency
+### 2d. Org consistency
 
-- Read `context/ORG.md`
+- Read `context/org/README.md`
 - Flag if team members listed there don't match the people index
 - Flag if products/objectives listed there contradict active project descriptions
 

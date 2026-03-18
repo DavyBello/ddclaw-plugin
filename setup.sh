@@ -252,15 +252,30 @@ write_file "context/org/README.md" "# Org Context
 write_file "context/projects/README.md" "# Projects
 
 ## Active
-[Use /add-project to add projects here]
+
+| Project | Status | What's Next |
+|---------|--------|-------------|
+| (use /add-project to add projects) | | |
 
 ## Blocked
 
+| Project | Blocker |
+|---------|---------|
+
+## Completed / Archived
+
+| Project | Outcome |
+|---------|---------|
+
 ## Paused
+
+- [none yet]
 
 ---
 
 One folder per project: \`project-name/README.md\`
+
+Read the full README when you need details. This index is loaded at session start; individual READMEs are not.
 "
 
 write_file "context/projects/_TEMPLATE.md" "# [Project Name]
