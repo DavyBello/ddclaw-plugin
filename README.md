@@ -51,6 +51,7 @@ Or from standalone repo:
   - `ddclaw:peer-feedback` — Generate structured peer feedback
   - `ddclaw:manager-evaluation` — Write a manager evaluation for a report
   - `ddclaw:get-standup` — Fetch standup from Slack (needs team config)
+  - `ddclaw:sprint` — View, close, or create Jira sprints (needs Jira config)
 
 ## Recommended plugins
 
@@ -65,6 +66,27 @@ These pair well with ddclaw:
   ```bash
   /plugin install episodic-memory@superpowers-marketplace
   ```
+
+## Jira sprint management setup
+
+The `/sprint` skill requires:
+
+1. **Jira API token** — generate at https://id.atlassian.com/manage-profile/security/api-tokens and add to your shell profile:
+   ```bash
+   export JIRA_API_TOKEN="your-token-here"
+   ```
+
+2. **Jira config in `context/config.md`** — add these fields:
+   ```markdown
+   ## Jira Sprint Config
+   - Board ID: 9232
+   - Sprint cadence: 2 weeks
+   - Sprint naming: "DD Mon - DD Mon"
+   - Jira email: you@company.com
+   - Base URL: https://yourcompany.atlassian.net
+   ```
+
+   Find your board ID: go to your Jira board, the URL contains `/board/XXXX`.
 
 ## Recommended MCP servers
 
