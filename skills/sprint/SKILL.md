@@ -1,19 +1,19 @@
 ---
 name: ddclaw:sprint
-description: Manage Jira sprints — view, close, or create sprints on the DNV board. Use when user says "sprint", "sprint view", "sprint close", "sprint create", or "close the sprint".
+description: Manage Jira sprints — view, close, or create sprints on your team's board. Use when user says "sprint", "sprint view", "sprint close", "sprint create", or "close the sprint".
 argument-hint: "[view|close|create] — defaults to view"
 ---
 
-Manage Jira sprints on the DNV board via the Agile REST API.
+Manage Jira sprints on your team's board via the Agile REST API.
 
 ## 0. Load config
 
 Read `context/config.md` for:
-- `DNV board ID` (e.g., 9232)
+- `Board ID` (e.g., 9232)
 - `Sprint cadence` (e.g., 2 weeks)
 - `Sprint naming` pattern (e.g., "DD Mon - DD Mon")
-- `Jira email` (e.g., ladi.bello@datadoghq.com)
-- `Base URL` (e.g., https://datadoghq.atlassian.net)
+- `Jira email` (e.g., you@example.com)
+- `Base URL` (e.g., https://yourcompany.atlassian.net)
 
 The API token comes from the `$JIRA_API_TOKEN` environment variable. Verify it is set before proceeding. If not, tell the user: "Set JIRA_API_TOKEN in your shell profile (~/.zshrc). Generate one at https://id.atlassian.com/manage-profile/security/api-tokens"
 
@@ -43,7 +43,7 @@ curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
   | python3 -m json.tool
 ```
 
-Find the sprint whose `originBoardId` matches the DNV board ID. Ignore sprints from other boards (they may appear if shared).
+Find the sprint whose `originBoardId` matches the configured board ID. Ignore sprints from other boards (they may appear if shared).
 
 ### 2. Fetch sprint issues
 
@@ -62,16 +62,16 @@ Group issues by status category and display:
 Ends: Apr 13
 
 ### Done (X)
-- DNV-553 — Make popover go away quicker (Matthew)
+- PROJ-NNN — Summary (Assignee)
 
 ### In Progress (X)
-- DNV-556 — Custom context link spaces bug (Jack)
+- PROJ-NNN — Summary (Assignee)
 
 ### In Review (X)
-- DNV-554 — Remove sankey FF (Marcela)
+- PROJ-NNN — Summary (Assignee)
 
 ### To Do (X)
-- DNV-555 — Rollout WebGL embeddingsmap (unassigned)
+- PROJ-NNN — Summary (unassigned)
 
 **Summary:** X total — Y done, Z in progress, W to do
 ```
@@ -101,7 +101,7 @@ curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
   "$BASE_URL/rest/agile/1.0/board/BOARD_ID/sprint?state=future"
 ```
 
-If a future sprint exists on the DNV board, propose it as the target for incomplete issues.
+If a future sprint exists on the configured board, propose it as the target for incomplete issues.
 
 If no future sprint exists, propose creating one:
 - Auto-generate name from the closing sprint's end date + cadence (e.g., closing "30 Mar - 13 Apr" → create "13 Apr - 27 Apr")
@@ -117,8 +117,8 @@ Show the user the plan:
 **Carrying over:** 5 issues → "13 Apr - 27 Apr" (new sprint)
 
 Incomplete issues to move:
-- DNV-556 — Custom context link spaces bug (In Progress)
-- DNV-555 — Rollout WebGL embeddingsmap (To Do)
+- PROJ-NNN — Summary (In Progress)
+- PROJ-NNN — Summary (To Do)
 ...
 
 Create new sprint "13 Apr - 27 Apr" and close current? (yes/no)
@@ -147,7 +147,7 @@ Collect all issue IDs where status category is NOT "Done". Move them:
 curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
   -X POST "$BASE_URL/rest/agile/1.0/sprint/TARGET_SPRINT_ID/issue" \
   -d '{
-    "issues": ["DNV-555", "DNV-556", ...]
+    "issues": ["PROJ-NNN", "PROJ-NNN", ...]
   }'
 ```
 
@@ -164,6 +164,19 @@ curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
 
 **Note:** The Jira API uses `POST` (not `PUT`) to update sprint state. The `completeDate` should be the current timestamp.
 
+### 6b. Activate the new sprint
+
+The newly created (or selected future) target sprint is in `future` state. Activate it so it becomes the team's current active sprint:
+
+```bash
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -X POST "$BASE_URL/rest/agile/1.0/sprint/TARGET_SPRINT_ID" \
+  -d '{"state": "active"}'
+```
+
+This applies whether the target was newly created in step 4 or was an already-existing future sprint chosen in step 3. Skip this step only if the user explicitly says they want the next sprint to stay in `future` state (e.g., they're closing early and won't start the next sprint until later).
+
 ### 7. Save sprint file
 
 Write to `context/sprints/YYYY-MM-DD.md` (using the sprint start date) with this format:
@@ -178,10 +191,10 @@ Write to `context/sprints/YYYY-MM-DD.md` (using the sprint start date) with this
 - **Carried over:** Y issues → [target sprint name]
 
 ### Completed
-- DNV-NNN — Summary (Assignee)
+- PROJ-NNN — Summary (Assignee)
 
 ### Carried Over
-- DNV-NNN — Summary (Assignee) — status
+- PROJ-NNN — Summary (Assignee) — status
 
 ## Notes
 [Meeting notes / retro summary if provided by user, otherwise omit this section]
@@ -208,7 +221,7 @@ Append to `memory/YYYY-MM-DD.md` (today's date):
 ## Sprint Closed: 30 Mar - 13 Apr
 
 **Completed:** 7 issues
-**Carried over:** 5 issues → 13 Apr - 27 Apr
+**Carried over:** 5 issues → 13 Apr - 27 Apr (now active)
 **Sprint file saved:** context/sprints/2026-03-30.md
 
 ### Context Updated
@@ -222,7 +235,7 @@ Append to `memory/YYYY-MM-DD.md` (today's date):
 
 ### 1. Determine sprint parameters
 
-Look at the most recent sprint (active or closed) on the DNV board:
+Look at the most recent sprint (active or closed) on the configured board:
 
 ```bash
 curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
@@ -244,7 +257,7 @@ If the user provided arguments beyond "create" (e.g., `/sprint create 14 Apr - 2
 **Name:** 13 Apr - 27 Apr
 **Start:** 2026-04-13
 **End:** 2026-04-27
-**Board:** DNV (9232)
+**Board:** [board name] (BOARD_ID)
 
 Create? (yes/no)
 ```
@@ -277,4 +290,4 @@ State: future
 - If any API call returns a non-200 status, show the full error response and stop.
 - If `$JIRA_API_TOKEN` is not set, tell the user: "Set JIRA_API_TOKEN in your shell profile. Generate one at https://id.atlassian.com/manage-profile/security/api-tokens"
 - If `Jira email` is missing from `context/config.md`, ask the user to add it.
-- If the active sprint is from another board (check `originBoardId`), skip it and note that no DNV sprint is active.
+- If the active sprint is from another board (check `originBoardId`), skip it and note that no sprint is active on the configured board.
