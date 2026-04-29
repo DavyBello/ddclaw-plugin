@@ -17,12 +17,23 @@ If `context/config.md` doesn't exist or is missing the standup section, ask the 
 - Slack channel ID (e.g. C08MHL0GFJ7)
 - Team member names (comma-separated)
 
-## 1. Parse date
+## 1. Parse date and detect gaps
 
 - If an argument is provided, parse it as a date (`YYYY-MM-DD`, or relative: `yesterday`, `today`, day name like `friday`).
 - If no argument, default to **yesterday**.
 - Store the resolved date as `TARGET_DATE` (YYYY-MM-DD format).
 - Check if `context/standups/TARGET_DATE.md` already exists. If it does, skip to step 6 (context update only) and note that the standup file already existed.
+
+### 1b. Check for late posts on previous standup
+
+Before fetching `TARGET_DATE`, find the **most recent existing standup file** in `context/standups/` (by filename date, excluding `TARGET_DATE` itself). Call this `PREV_DATE`.
+
+- Read `context/standups/PREV_DATE.md` and note the `## Missing` section — these are people who hadn't posted when the file was last saved.
+- If the Missing section lists anyone, re-read the Slack thread for `PREV_DATE` (use the source URL in the file header to extract the thread timestamp) and check if any of the "missing" people posted replies after the file was last saved.
+- If late posts are found:
+  - Add their updates to the standup file as `## [Name] (late — posted [date] [time])` above the `## Missing` section.
+  - Remove them from the `## Missing` list.
+  - Note the late-post updates in the step 7 report.
 
 ## 2. Find the standup message
 
@@ -150,3 +161,14 @@ Output a summary:
 ### Skipped (no meaningful update needed)
 - [files where standup didn't add new info]
 ```
+
+## 8. Offer to tag missing people
+
+If the `## Missing` list for `TARGET_DATE` has anyone (excluding people separately known to be OOO/sick), ask the user whether to tag them in the standup thread as a nudge.
+
+- Default tag format: `<@USER_ID> <@USER_ID> ... :point_up_2:`
+- Look up user IDs from prior standup threads in the same channel (the Slack thread reply payload includes user IDs) or from `context/people/*/README.md` if recorded there.
+- Reply in-thread using `slack_send_message` with `thread_ts` set to the standup parent timestamp. Do NOT use `reply_broadcast` -- keep the nudge inside the thread.
+- Skip the offer if the Missing list is empty, or if step 1b just resolved late posts and only "OOO/sick" entries remain.
+
+Only send the tag after explicit user confirmation (e.g. "yes", "do it", "tag them"). Don't tag without confirmation.

@@ -5,27 +5,32 @@ description: Fetch PRs assigned personally to me (not team), plus my open PRs wi
 
 Fetch PRs using the GitHub GraphQL API to distinguish personal vs team review requests.
 
+**Critical:** The REST search API (`review-requested:USER`) returns PRs where the user OR any team they belong to is a reviewer. You MUST use GraphQL with `reviewRequests` to filter down to personal-only requests.
+
 ## 0. Get GitHub username
 
 ```bash
 gh api user --jq '.login'
 ```
 
-Store the result as `$GH_USER`.
+Store as `GH_USER`.
 
 ## 1. PRs where I'm personally a requested reviewer
+
+Use GraphQL to fetch candidates and filter by reviewer type. Substitute the actual username into both the search query string and the jq filter (do NOT leave literal `GH_USER` in the query):
 
 ```bash
 gh api graphql -f query='
 {
-  search(query: "is:pr is:open draft:false review-requested:$GH_USER", type: ISSUE, first: 30) {
+  search(query: "is:pr is:open draft:false review-requested:USERNAME_HERE", type: ISSUE, first: 30) {
     nodes {
       ... on PullRequest {
         number
         title
         url
-        createdAt
+        updatedAt
         author { login }
+        repository { nameWithOwner }
         reviewRequests(first: 20) {
           nodes {
             requestedReviewer {
@@ -37,27 +42,27 @@ gh api graphql -f query='
       }
     }
   }
-}' --jq '.data.search.nodes[] | select(.reviewRequests.nodes[]?.requestedReviewer.login? == "$GH_USER") | {number, title, url, author: .author.login, createdAt}'
+}'
 ```
 
-Replace `$GH_USER` with the actual username from step 0 in both the search query and the jq filter.
-
-This filters out PRs that are only assigned to a team (e.g., via CODEOWNERS) and returns only ones where the user is explicitly listed as a `User` reviewer.
+Then filter the results: only include PRs where `requestedReviewer` contains a `User` entry with `login == GH_USER`. Discard PRs that only have `Team` entries — those are team-level CODEOWNERS requests, not personal.
 
 ## 2. My open PRs
 
 ```bash
-gh search prs --author=$GH_USER --state=open --json number,title,url,repository,createdAt
+gh search prs --author=GH_USER --state=open --json number,title,url,repository,updatedAt
 ```
+
+Filter out non-org repos (personal repos, old forks, etc.) if the user has a primary org they care about.
 
 ## Output format
 
 ```
 ## PRs awaiting my review (X)
-- [title](url) — author, age
+- [title](url) — repo, author, updated X ago
 
 ## My open PRs (X)
-- [title](url) — review status
+- [title](url) — repo, updated X ago
 ```
 
 If either section is empty, say so in one line.
